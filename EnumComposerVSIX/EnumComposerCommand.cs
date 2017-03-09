@@ -9,6 +9,9 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using EnumComposer;
+using EnvDTE;
+using EnvDTE80;
 
 namespace EnumComposerVSIX
 {
@@ -93,17 +96,143 @@ namespace EnumComposerVSIX
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "EnumComposerCommand";
+            //string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
+            //string title = "EnumComposerCommand";
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.ServiceProvider,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            //// Show a message box to prove we were here
+            //VsShellUtilities.ShowMessageBox(
+            //    this.ServiceProvider,
+            //    message,
+            //    title,
+            //    OLEMSGICON.OLEMSGICON_INFO,
+            //    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+            //    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+            IVsOutputWindow outWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            IEnumLog log = new EnumLog(outWindow);
+
+            log.WriteLine("");
+            log.WriteLine("started.");
+            RunComposerScan(log);
+            log.WriteLine("finished.");
         }
+
+        #region 
+        private void RunComposerScan(IEnumLog log)
+        {
+            try
+            {
+                RunComposerScan_Inner(log);
+            }
+            catch (Exception ex)
+            {
+                string message = "Sorry, and exception has occurred." + Environment.NewLine + Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine + "See the Output\\Debug window for details.";
+                if (log != null)
+                {
+                    string logMessage = DedbugLog.ExceptionMessage(ex);
+                    log.WriteLine(logMessage);
+                }
+
+                //IVsUIShell uiShell = (IVsUIShell)Package.GetGlobalService(typeof(SVsUIShell)); //todo: new dialog
+                //Guid clsid = Guid.Empty;
+                //int result;
+                //uiShell.ShowMessageBox(0,
+                //       ref clsid,
+                //       "EnumComposer Visual Studio Package",
+                //       message,
+                //       string.Empty,
+                //       0,
+                //       OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                //       OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
+                //       OLEMSGICON.OLEMSGICON_INFO,
+                //       0,        // false
+                //       out result);
+
+                //string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
+                string title = "EnumComposerCommand";
+
+                // Show a message box to prove we were here
+                VsShellUtilities.ShowMessageBox(
+                    this.ServiceProvider,
+                    message,
+                    title,
+                    OLEMSGICON.OLEMSGICON_INFO,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            }
+        }
+
+        private void RunComposerScan_Inner(IEnumLog log)
+        {
+            DTE2 applicationObject = (DTE2)Package.GetGlobalService(typeof(EnvDTE.DTE));
+
+            TextDocument document = ObtainActiveDocument(applicationObject);
+            if (document == null)
+            {
+                log.WriteLine("not a C# file.");
+                return;
+            }
+
+            DbReader dbReader = new DbReader(null, null, log);
+            IEnumConfigReader configReaderVsp = new ConfigReaderVsp(applicationObject.ActiveDocument.ProjectItem.ContainingProject);
+            dbReader._configReader = configReaderVsp;
+
+            ComposerStrings composer = new ComposerStrings(dbReader, log);
+            ApplyComposer(document, composer);
+        }
+
+        public void ApplyComposer(TextDocument document, ComposerStrings composer)
+        {
+            /* get document bounds */
+            EditPoint startEdit = document.CreateEditPoint(document.StartPoint);
+            EditPoint endEdit = document.EndPoint.CreateEditPoint();
+
+            /* run composer */
+            string text = startEdit.GetText(document.EndPoint);
+            composer.Compose(text);
+            if (composer.EnumModels != null && composer.EnumModels.Count > 0)
+            {
+                /* get new file*/
+                text = composer.GetResultFile();
+
+                /* delete and re-insert full document */
+                startEdit.Delete(endEdit);
+                startEdit.Insert(text);
+            }
+        }
+
+        private TextDocument ObtainActiveDocument(DTE2 applicationObject)
+        {
+            try
+            {
+                /* query ActiveDocument can cause exception if active document f.e. is project properties */
+                if (applicationObject.ActiveDocument == null)
+                {
+                    return null;
+                }
+
+                TextDocument document = (TextDocument)applicationObject.ActiveDocument.Object("TextDocument");
+                return document;
+            }
+            catch
+            {
+                /* see notes in try{} */
+                return null;
+            }
+        }
+
+        public string Reverse(string text)
+        {
+            /* test method, not used */
+            char[] cArray = text.ToCharArray();
+            string reverse = "";
+            for (int i = cArray.Length - 1; i > -1; i--)
+            {
+                reverse += cArray[i];
+            }
+            return reverse;
+        }
+
+        #endregion 
     }
 }
