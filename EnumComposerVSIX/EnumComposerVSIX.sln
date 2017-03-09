@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumComposerVSIX", "EnumComposerVSIX.csproj", "{C2BBFEF9-BAD4-4FA6-85C8-B32DBB287C0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumComposer", "..\EnumComposer\EnumComposer.csproj", "{9915BBE8-78D5-4ECE-9EE3-2905417629C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C2BBFEF9-BAD4-4FA6-85C8-B32DBB287C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2BBFEF9-BAD4-4FA6-85C8-B32DBB287C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2BBFEF9-BAD4-4FA6-85C8-B32DBB287C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9915BBE8-78D5-4ECE-9EE3-2905417629C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9915BBE8-78D5-4ECE-9EE3-2905417629C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9915BBE8-78D5-4ECE-9EE3-2905417629C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9915BBE8-78D5-4ECE-9EE3-2905417629C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
