@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="EnumComposerVSIX.Victor Cherniavsky.7f909db7-016a-4b6a-9f51-c6c5dc7769fa" Version="1.0" Language="en-US" Publisher="Victor Cherniavsky" />
+    <Identity Id="EnumComposerVSIX.Victor Cherniavsky.7f909db7-016a-4b6a-9f51-c6c5dc7769fa" Version="2.0" Language="en-US" Publisher="Victor Cherniavsky" />
     <DisplayName>Enum Composer </DisplayName>
     <Description xml:space="preserve">Generate and update C# enumerations using data from a MS SQL Server, ODBC or OLEDB data sources.</Description>
     <MoreInfo>https://github.com/uriah65/EnumComposer/wiki</MoreInfo>
