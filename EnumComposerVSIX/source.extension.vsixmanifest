@@ -2,8 +2,13 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="EnumComposerVSIX.Victor Cherniavsky.7f909db7-016a-4b6a-9f51-c6c5dc7769fa" Version="1.0" Language="en-US" Publisher="Victor Cherniavsky" />
-    <DisplayName>EnumComposerVSIX</DisplayName>
-    <Description>Empty VSIX Project.</Description>
+    <DisplayName>Enum Composer </DisplayName>
+    <Description xml:space="preserve">Generate and update C# enumerations using data from a MS SQL Server, ODBC or OLEDB data sources.</Description>
+    <MoreInfo>https://github.com/uriah65/EnumComposer/wiki</MoreInfo>
+    <License>License_EnumComposer.txt</License>
+    <ReleaseNotes>License_EnumComposer.txt</ReleaseNotes>
+    <Icon>ec_icon_32x32.ico</Icon>
+    <PreviewImage>ec_icon_white_back200x200.ico</PreviewImage>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0]" />

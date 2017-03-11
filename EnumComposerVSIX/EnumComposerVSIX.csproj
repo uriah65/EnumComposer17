@@ -14,6 +14,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ec_icon_32x32.ico</ApplicationIcon>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -59,8 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="EULA.rtf" />
     <None Include="Key.snk" />
     <None Include="packages.config" />
+    <None Include="Resources\ec_icon_200x200.psd" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -69,7 +74,33 @@
     <VSCTCompile Include="EnumComposerCommandPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
+    <Content Include="ec_icon_32x32.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ec_icon_white_back200x200.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="index.html" />
+    <Content Include="License_EnumComposer.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Resources\ec_icon_200x200.gif" />
+    <Content Include="Resources\ec_icon_200x200.png" />
+    <Content Include="Resources\ec_icon_32x32.ico">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ec_icon_32x32.png" />
+    <Content Include="Resources\ec_icon_white_back200x200.gif" />
+    <Content Include="Resources\ec_icon_white_back200x200.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ec_icon_white_back200x200.png" />
+    <Content Include="Resources\ec_icon_white_back32x32.gif" />
+    <Content Include="Resources\ec_icon_white_back32x32.png" />
     <Content Include="Resources\EnumComposerCommand.png" />
     <Content Include="Resources\EnumComposerCommandPackage.ico" />
     <Content Include="stylesheet.css" />
