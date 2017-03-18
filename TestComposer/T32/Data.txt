@@ -1,0 +1,12 @@
+﻿id, name
+1, AliceBlue
+2, AntiqueWhite
+3, Aqua
+4, Aquamarine
+5, Azure
+6, Beige
+7, Bisque
+8, Black
+9, BlanchedAlmond
+10, Blue
+11, BlueViolet
