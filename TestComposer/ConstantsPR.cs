@@ -7,7 +7,7 @@ namespace TestComposer
     {
         public static bool HasNoAdventureWorks
         {
-            get { return Environment.MachineName.ToLower() != "dellstudioxps"; }
+            get { return Environment.MachineName.ToLower() != "dellstudioxps"; } //VC:20211113
         }
 
         public static string StripSpace(string str)
@@ -73,7 +73,7 @@ namespace TestComposer
                 Assert.AreNotEqual(null, actual, message);
                 Assert.AreEqual(expectedProvider, actual.Item1, message);
                 Assert.AreEqual(expectedConnectionString, actual.Item2, message);
-            }            
+            }
         }
 
         #endregion Custom Asserts
